@@ -1,21 +1,14 @@
-
 using Api.Middleware;
 using AutoMapper;
 using Base.Models;
 using Business.Cqrs;
 using Business.Mapper;
-
-// using AutoMapper;
-// using FluentValidation.AspNetCore;
-// using Microsoft.EntityFrameworkCore;
-// using Data;
-// using Business.Cqrs;
-// using Business.Mapper;
-// using Business.Validator;
+using Business.Validator;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Schema.Request;
 
 namespace Api;
-
-
 
 public class Startup
 {
@@ -28,29 +21,29 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        
-        services.Configure<PositionOptions>(Configuration.GetSection(PositionOptions.Position));   
-        // services.AddSingleton<Base.Models.PositionOptions>();
-        
+        services.Configure<PositionOptions>(Configuration.GetSection(PositionOptions.Position));
+
         var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MapperConfig()));
         services.AddSingleton(mapperConfig.CreateMapper());
-        //
-        //
-        // services.AddControllers().AddFluentValidation(x =>
-        // {
-        //     x.RegisterValidatorsFromAssemblyContaining<CreateCustomerValidator>();
-        // });
-        //
         services.AddSingleton<IUrlPaths, UrlPaths>();
-        services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(typeof(GetAllSupportedCurrencies).Assembly));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetAllSupportedCurrencies).Assembly));
         services.AddControllers();
+        
+        //     .AddFluentValidation(x =>
+        // {
+        //     x.RegisterValidatorsFromAssemblyContaining<ConvertCurrencyValidator>();
+        // });
+        
+        services.AddFluentValidationAutoValidation();
+        services.AddSingleton<IValidator<ConvertCurrencyRequest>, ConvertCurrencyValidator>();
+
+        // services.AddValidatorsFromAssemblyContaining<ConvertCurrencyValidator>();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
     }
-    
-    public void Configure(IApplicationBuilder app,IWebHostEnvironment env)
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
         {
@@ -58,6 +51,7 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
         app.UseMiddleware<ErrorHandlerMiddleware>();
 
         // app.UseHttpsRedirection();
