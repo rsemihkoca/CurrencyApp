@@ -20,7 +20,7 @@ jobs:
     - name: Change to CurrencyApplication directory
       run: cd CurrencyApplication
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./CurrencyApplication.sln
     - name: Build
       run: dotnet build -c Release --no-restore Api/Api.csproj
     - name: Test
