@@ -11,12 +11,11 @@ public class MapperConfig : Profile
     
         CreateMap<Dictionary<string, string>, CurrencyResponse>()
             .ForMember(dest =>dest.Data, opt => opt.MapFrom(src => src));
-        // CreateMap<KeyValuePair<string, string>, CurrencyResponse>()
-        // .ForMember(x => x.Code, opt => opt.MapFrom(src => src.Key))
-        // .ForMember(x => x.Name, opt => opt.MapFrom(src => src.Value));
-        // CreateMap<KeyValuePair<string, string>, CurrencyResponse>()
-        //     .ForMember(x => x.Code, opt => opt.MapFrom(src => src.Key))
-        //     .ForMember(x => x.Name, opt => opt.MapFrom(src => src.Value));
-        // CreateMap<KeyValuePair<string, string>, CurrencyResponse>();
+
+        CreateMap<ConvertCurrencyJsonResponse, ConvertCurrencyResponse>()
+            .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.query.amount))
+            .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.query.from))
+            .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.query.to))
+            .ForMember(dest => dest.ConvertedAmount, opt => opt.MapFrom(src => src.result));
     }
 }
