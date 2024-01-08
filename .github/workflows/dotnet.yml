@@ -19,6 +19,8 @@ jobs:
         dotnet-version: 8.0.x
     - name: Change to CurrencyApplication directory
       run: cd CurrencyApplication
+    - name: list files
+      run: ls -a
     - name: Restore dependencies
       run: dotnet restore ./CurrencyApplication.sln
     - name: Build
