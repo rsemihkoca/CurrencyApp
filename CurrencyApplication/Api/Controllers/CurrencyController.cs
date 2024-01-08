@@ -3,6 +3,7 @@ using Business.Cqrs;
 using CurrencyApi.Base.Response;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Schema.Request;
 
 
 namespace Api;
@@ -21,6 +22,14 @@ public class CurrencyController : ControllerBase
     public async Task<ApiResponse<CurrencyResponse>> Get()
     {
         var operation = new GetAllSupportedCurrencies();
+        var result = await _mediator.Send(operation);
+        return result;
+    }
+    
+    [HttpPost("Convert")]
+    public async Task<ApiResponse<ConvertCurrencyResponse>> Post([FromBody] ConvertCurrencyRequest model)
+    {
+        var operation = new ConvertCurrency(model);
         var result = await _mediator.Send(operation);
         return result;
     }
