@@ -13,9 +13,9 @@ public class MapperConfig : Profile
             .ForMember(dest =>dest.Data, opt => opt.MapFrom(src => src));
 
         CreateMap<ConvertCurrencyJsonResponse, ConvertCurrencyResponse>()
-            .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.query.amount))
-            .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.query.from))
-            .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.query.to))
-            .ForMember(dest => dest.ConvertedAmount, opt => opt.MapFrom(src => src.result));
+            .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Query.Amount))
+            .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.Query.From))
+            .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.Query.To))
+            .ForMember(dest => dest.ConvertedAmount, opt => opt.MapFrom(src => src.Result));
     }
 }
