@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Base.Models;
 
 public record CurrencyJsonResponse
@@ -5,27 +7,43 @@ public record CurrencyJsonResponse
     public bool Success { get; set; }
     public Dictionary<string, string> Symbols { get; set; }
 }
-
-
 public class Info
 {
-    public int timestamp { get; set; }
-    public double rate { get; set; }
+    [JsonPropertyName("timestamp")]
+    public int Timestamp { get; set; }
+    
+    [JsonPropertyName("rate")]
+    public double Rate { get; set; }
 }
 
 public class Query
 {
-    public string from { get; set; }
-    public string to { get; set; }
-    public double amount { get; set; }
+    [JsonPropertyName("from")]
+    public string From { get; set; }
+
+    [JsonPropertyName("to")]
+    public string To { get; set; }
+
+    [JsonPropertyName("amount")]
+    public double Amount { get; set; }
 }
 
 public class ConvertCurrencyJsonResponse
 {
-    public bool success { get; set; }
-    public Query query { get; set; }
-    public Info info { get; set; }
-    public string date { get; set; }
-    public double result { get; set; }
+    [JsonPropertyName("success")]
+    public bool Success { get; set; }
+
+    [JsonPropertyName("query")]
+    public Query Query { get; set; }
+
+    [JsonPropertyName("info")]
+    public Info Info { get; set; }
+
+    [JsonPropertyName("date")]
+    public string Date { get; set; }
+
+    [JsonPropertyName("result")]
+    public double Result { get; set; }
 }
+
 
