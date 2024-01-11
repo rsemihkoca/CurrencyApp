@@ -31,3 +31,15 @@ public class ConvertCurrencyValidator : AbstractValidator<ConvertCurrencyRequest
             .WithMessage("Amount must be equal or greater than 0");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
