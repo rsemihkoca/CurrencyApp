@@ -37,21 +37,17 @@ public class CurrencyQueryHandler :
         
         var virtualRequest = new RestRequest(_urlPaths.SupportedCurrencies);
 
-        // Set the headers using the configuration
         virtualRequest.AddHeader("X-RapidAPI-Key", _options.Value.ApiKey);
         virtualRequest.AddHeader("X-RapidAPI-Host", _options.Value.Host);
 
-        // Execute the request
         RestResponse<JsonNode> response = await client.ExecuteAsync<JsonNode>(virtualRequest, cancellationToken);
         // var dynamicObject = JsonSerializer.Deserialize<JsonNode>(response.Content);
         
-        // Check the response
         if (!(bool)response.Data["success"])
         {
             return new ApiResponse<CurrencyResponse>(response.Data["error"]["info"].ToString());
         }
 
-        // Map the response to the ApiResponse
         if (response.Content != null)
         {
             CurrencyJsonResponse? apiResponse = JsonConvert.DeserializeObject<CurrencyJsonResponse>(response.Content);
@@ -68,7 +64,7 @@ public class CurrencyQueryHandler :
 
     public async Task<ApiResponse<ConvertCurrencyResponse>> Handle(ConvertCurrency request, CancellationToken cancellationToken)
     {
-    
+        // TODO:
         // Convert decimal amount
         // Valıd but unsupported currency and invalid currency
         // Rate limiting
@@ -79,20 +75,16 @@ public class CurrencyQueryHandler :
         
         var virtualRequest = new RestRequest(requestUrl);
 
-        // Set the headers using the configuration
         virtualRequest.AddHeader("X-RapidAPI-Key", _options.Value.ApiKey);
         virtualRequest.AddHeader("X-RapidAPI-Host", _options.Value.Host);
 
-        // Execute the request
         RestResponse<JsonNode> response = await client.ExecuteAsync<JsonNode>(virtualRequest, cancellationToken);
 
-        // Check the response
         if (!(bool)response.Data["success"])
         {
             return new ApiResponse<ConvertCurrencyResponse>(response.Data["error"]["info"].ToString());
         }
 
-        // Map the response to the ApiResponse
         if (response.Content != null)
         {
             ConvertCurrencyJsonResponse? apiResponse = JsonConvert.DeserializeObject<ConvertCurrencyJsonResponse>(response.Content);
