@@ -3,8 +3,6 @@
 
 ## Case Detail
 
-### -Herhangi bir online Api hizmetinden faydalanarak anlık kur bilgilerini sunan bir api seti hazırlayınız.
-
 ### -Seçtiğiniz Currency tipleri için seçtiğiniz Currecy tipine göre kur değerlerini getiren bir metod hazırlayınız.
 ![image](https://github.com/InancYucel/CurrencyApp/assets/48295407/2d806c95-ae04-490a-9d0b-b6ee704aa9f3) ![image](https://github.com/InancYucel/CurrencyApp/assets/48295407/008a9cf3-c652-4318-9ea7-05ec53df643a)
 
