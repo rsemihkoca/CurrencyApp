@@ -29,4 +29,5 @@
 ### -İsimlendirmelere dikkat edilsin ✔️
 
 ## -Gerekli validasyonlar yazılsın ✔️
-![image](https://github.com/InancYucel/CurrencyApp/assets/48295407/3e6affff-8373-4a31-9431-62905696a371)
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
