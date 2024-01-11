@@ -28,16 +28,11 @@ public class Startup
         services.AddSingleton<IUrlPaths, UrlPaths>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetAllSupportedCurrencies).Assembly));
         services.AddControllers();
-        
-        //     .AddFluentValidation(x =>
-        // {
-        //     x.RegisterValidatorsFromAssemblyContaining<ConvertCurrencyValidator>();
-        // });
+
         
         services.AddFluentValidationAutoValidation();
-        services.AddSingleton<IValidator<ConvertCurrencyRequest>, ConvertCurrencyValidator>();
-
-        // services.AddValidatorsFromAssemblyContaining<ConvertCurrencyValidator>();
+        services.AddTransient<IValidator<ConvertCurrencyRequest>, ConvertCurrencyValidator>();
+        services.AddTransient<IValidator<ConvertMultipleCurrencyRequest>, ConvertMultipleCurrencyValidator>();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
