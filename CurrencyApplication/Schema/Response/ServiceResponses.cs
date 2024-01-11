@@ -12,3 +12,9 @@ public record ConvertCurrencyResponse
     public string To { get; set; }
     public decimal ConvertedAmount { get; set; }
 }
+
+
+public record ConvertMultipleCurrencyResponse
+{
+    public Dictionary<string, double> Data { get; set; }
+}
