@@ -105,6 +105,7 @@ public class CurrencyQueryHandler :
             }
             
             var currencyRates = new Dictionary<string, string>();
+            
             var fromRate = apiResponse.Rates[request.Model.From];
             foreach (var x in apiResponse.Rates)
             {

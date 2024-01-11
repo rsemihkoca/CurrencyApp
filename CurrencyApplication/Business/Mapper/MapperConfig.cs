@@ -19,6 +19,5 @@ public class MapperConfig : Profile
         
         CreateMap<Dictionary<string, string>, ConvertMultipleCurrencyResponse>()
             .ForMember(dest =>dest.Data, opt => opt.MapFrom(src => src));
-        
     }
 }

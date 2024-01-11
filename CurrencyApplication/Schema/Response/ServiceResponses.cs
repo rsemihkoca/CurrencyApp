@@ -16,5 +16,4 @@ public record ConvertCurrencyResponse
 public record ConvertMultipleCurrencyResponse
 {
     public Dictionary<string, string> Data { get; set; }
-
 }

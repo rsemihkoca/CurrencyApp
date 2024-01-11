@@ -31,8 +31,10 @@ public class Startup
         services.AddControllers();
         
         services.AddFluentValidationAutoValidation();
+        services.AddSingleton<IValidator<ConvertMultipleCurrencyRequest>, ConvertMultipleCurrencyValidator>();
         services.AddSingleton<IValidator<ConvertCurrencyRequest>, ConvertCurrencyValidator>();
-
+        
+        //FluentValidators Install
         // services.AddValidatorsFromAssemblyContaining<ConvertCurrencyValidator>();
 
         services.AddEndpointsApiExplorer();
