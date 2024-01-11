@@ -28,3 +28,4 @@
 
 ## -Gerekli validasyonlar yazılsın ✔️
 ![image](https://github.com/InancYucel/CurrencyApp/assets/48295407/3e6affff-8373-4a31-9431-62905696a371)
+![image](https://github.com/InancYucel/CurrencyApp/assets/48295407/87adfb48-2dab-4885-91db-ac952c267bee)
