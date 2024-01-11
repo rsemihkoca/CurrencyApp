@@ -4,7 +4,6 @@ using CurrencyApi.Base.Response;
 
 namespace Api.Middleware;
 
-
 public class ErrorHandlerMiddleware(RequestDelegate next)
 {
     public async Task Invoke(HttpContext context)

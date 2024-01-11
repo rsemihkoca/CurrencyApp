@@ -27,12 +27,8 @@ public class Startup
         services.AddSingleton(mapperConfig.CreateMapper());
         services.AddSingleton<IUrlPaths, UrlPaths>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetAllSupportedCurrencies).Assembly));
-        services.AddControllers();
         
-        //     .AddFluentValidation(x =>
-        // {
-        //     x.RegisterValidatorsFromAssemblyContaining<ConvertCurrencyValidator>();
-        // });
+        services.AddControllers();
         
         services.AddFluentValidationAutoValidation();
         services.AddSingleton<IValidator<ConvertCurrencyRequest>, ConvertCurrencyValidator>();

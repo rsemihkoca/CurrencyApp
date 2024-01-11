@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Schema.Request;
 
-
 namespace Api;
 
 [Route("api/[controller]")]
@@ -22,6 +21,14 @@ public class CurrencyController : ControllerBase
     public async Task<ApiResponse<CurrencyResponse>> Get()
     {
         var operation = new GetAllSupportedCurrencies();
+        var result = await _mediator.Send(operation);
+        return result;
+    }
+    
+    [HttpPost("ConvertMultiple")]
+    public async Task<ApiResponse<ConvertMultipleCurrencyResponse>> Post([FromBody] ConvertMultipleCurrencyRequest model)
+    {
+        var operation = new MultipleCurrencyRates(model);
         var result = await _mediator.Send(operation);
         return result;
     }

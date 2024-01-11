@@ -23,7 +23,6 @@ public class ConvertCurrencyValidator : AbstractValidator<ConvertCurrencyRequest
             .Must(receivingCurrency => ISO._4217.CurrencyCodesResolver.Codes.Any(c => c.Code == receivingCurrency))
             .WithMessage("Please enter a valid currency code");
 
-
         RuleFor(x => x.Amount)
             .NotEmpty()
             .WithMessage("Amount is required")

@@ -1,5 +1,3 @@
-using System.Dynamic;
-using System.Net;
 using System.Text.Json.Nodes;
 using AutoMapper;
 using Base.Models;
@@ -15,7 +13,9 @@ namespace Business.Query;
 
 public class CurrencyQueryHandler :
     IRequestHandler<GetAllSupportedCurrencies, ApiResponse<CurrencyResponse>>,
-    IRequestHandler<ConvertCurrency, ApiResponse<ConvertCurrencyResponse>>
+    IRequestHandler<ConvertCurrency, ApiResponse<ConvertCurrencyResponse>>,
+    IRequestHandler<MultipleCurrencyRates, ApiResponse<ConvertMultipleCurrencyResponse>>
+
 {
     private readonly IMapper _mapper;
 
@@ -65,18 +65,66 @@ public class CurrencyQueryHandler :
             return new ApiResponse<CurrencyResponse>("No content");
         }
     }
+    
+    public async Task<ApiResponse<ConvertMultipleCurrencyResponse>> Handle(MultipleCurrencyRates request, CancellationToken cancellationToken)
+    {
+        var client = new RestClient(_options.Value.Url);
+        var requestUrl = string.Format(_urlPaths.ExchangeRateForSelectedCurrency, request.Model.From, request.Model.To);
+        var virtualRequest = new RestRequest(requestUrl);
+        
+        // Set the headers using the configuration
+        virtualRequest.AddHeader("X-RapidAPI-Key", _options.Value.ApiKey);
+        virtualRequest.AddHeader("X-RapidAPI-Host", _options.Value.Host);
+
+        // Execute the request
+        RestResponse<JsonNode> response = await client.ExecuteAsync<JsonNode>(virtualRequest, cancellationToken);
+        // var dynamicObject = JsonSerializer.Deserialize<JsonNode>(response.Content);
+        
+        // Check the response
+        if (!(bool)response.Data["success"])
+        {
+            return new ApiResponse<ConvertMultipleCurrencyResponse>(response.Data["error"]["info"].ToString());
+        }
+        
+        // Map the response to the ApiResponse
+        if (response.Content != null)
+        {
+            var apiResponse = JsonConvert.DeserializeObject<ConvertMultipleCurrencyJsonResponse>(response.Content);
+            if (apiResponse.Rates != null)
+            {
+                foreach (var x in apiResponse.Rates)
+                {
+                    if (!(request.Model.To.Contains(x.Key)))
+                    {
+                        if (!(request.Model.From.Contains(x.Key)))
+                        {
+                            apiResponse.Rates.Remove(x.Key);
+                        }
+                    }
+                }
+            }
+            
+            // TO DO
+            
+
+            var currencyData = _mapper.Map<ConvertMultipleCurrencyResponse>(apiResponse?.Rates);
+            
+            return new ApiResponse<ConvertMultipleCurrencyResponse>(currencyData);
+        }
+        else
+        {
+            return new ApiResponse<ConvertMultipleCurrencyResponse>("No content");
+        }
+    }
 
     public async Task<ApiResponse<ConvertCurrencyResponse>> Handle(ConvertCurrency request, CancellationToken cancellationToken)
     {
-    
         // Convert decimal amount
         // Valıd but unsupported currency and invalid currency
         // Rate limiting
         // Validations are working ?
         var client = new RestClient(_options.Value.Url);
-        
-        var requestUrl = String.Format(_urlPaths.ConvertCurrency, request.Model.From, request.Model.To, request.Model.Amount);
-        
+        var requestUrl = string.Format(_urlPaths.ConvertCurrency, request.Model.From, request.Model.To, request.Model.Amount);
         var virtualRequest = new RestRequest(requestUrl);
 
         // Set the headers using the configuration
@@ -105,6 +153,5 @@ public class CurrencyQueryHandler :
         {
             return new ApiResponse<ConvertCurrencyResponse>("No content");
         }
-    
     }
 }

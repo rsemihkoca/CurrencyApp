@@ -1,9 +1,7 @@
-
 using System.Net;
 using System.Text.Json;
 
 namespace CurrencyApi.Base.Response;
-
 
 public class ApiResponse
 {
@@ -29,7 +27,6 @@ public class ApiResponse
     public DateTime ServerDate { get; set; } = DateTime.UtcNow;
     public Guid ReferenceNo { get; set; } = Guid.NewGuid();
 }
-
 
 public class ApiResponse<T>
 {
@@ -57,17 +54,5 @@ public class ApiResponse<T>
         Response = default;
         Message = message;
     }
-    
     //Content((HttpStatusCode) 422, whatEver);
-    
-
 }
-
-
-
-
-
-
-
-
-
