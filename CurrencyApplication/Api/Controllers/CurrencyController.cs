@@ -33,4 +33,12 @@ public class CurrencyController : ControllerBase
         var result = await _mediator.Send(operation);
         return result;
     }
+    
+    [HttpPost("ConvertMultiple")]
+    public async Task<ApiResponse<ConvertMultipleCurrencyResponse>> Post([FromBody] ConvertMultipleCurrencyRequest model)
+    {
+        var operation = new ConvertMultipleCurrency(model);
+        var result = await _mediator.Send(operation);
+        return result;
+    }
 }
