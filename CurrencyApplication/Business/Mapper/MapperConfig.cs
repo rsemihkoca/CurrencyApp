@@ -17,5 +17,9 @@ public class MapperConfig : Profile
             .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.Query.From))
             .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.Query.To))
             .ForMember(dest => dest.ConvertedAmount, opt => opt.MapFrom(src => src.Result));
+
+        CreateMap<Dictionary<string, double>, ConvertMultipleCurrencyResponse>()
+            .ForMember(dest =>dest.Data, opt => opt.MapFrom(src => src));
+
     }
 }
