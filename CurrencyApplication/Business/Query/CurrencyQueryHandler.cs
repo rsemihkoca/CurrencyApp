@@ -104,10 +104,17 @@ public class CurrencyQueryHandler :
                 }
             }
             
-            // TO DO
-            
+            var currencyRates = new Dictionary<string, string>();
+            var fromRate = apiResponse.Rates[request.Model.From];
+            foreach (var x in apiResponse.Rates)
+            {
+                if (x.Key != request.Model.From)
+                {
+                    currencyRates.Add(x.Key, (Convert.ToDouble(x.Value)/Convert.ToDouble(fromRate)).ToString());
+                }
+            }
 
-            var currencyData = _mapper.Map<ConvertMultipleCurrencyResponse>(apiResponse?.Rates);
+            var currencyData = _mapper.Map<ConvertMultipleCurrencyResponse>(currencyRates);
             
             return new ApiResponse<ConvertMultipleCurrencyResponse>(currencyData);
         }
