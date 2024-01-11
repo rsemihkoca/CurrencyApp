@@ -47,3 +47,10 @@ public class ConvertCurrencyJsonResponse
 }
 
 
+public class ConvertMultipleCurrencyJsonResponse
+{
+    
+    [JsonPropertyName("rates")]
+    public Dictionary<string, double> Rates { get; set; }
+
+}
