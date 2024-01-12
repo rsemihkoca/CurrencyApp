@@ -4,16 +4,16 @@
 ## Case Detail
 
 ### -Herhangi bir online Api hizmetinden faydalanarak anlık kur bilgilerini sunan bir api seti hazırlayınız.
-![img.png](img.png)
+![img.png](.github/assets/img.png)
 
 ### -Seçtiğiniz Currency tipleri için seçtiğiniz Currecy tipine göre kur değerlerini getiren bir metod hazırlayınız. ✔️
-![img_1.png](img_1.png)
+![img_1.png](.github/assets/img_1.png)
 
 ### -Girilen tutar için A tipinden B tipine conversion yapan bir API geliştiriniz ( 10 USD -> 9 EUR etc.) ✔️
-![img_2.png](img_2.png)
+![img_2.png](.github/assets/img_2.png)
 
 ### -Desteklenen Currency tiplerini listeleyen bir api hazırlayınız. ✔️
-![img_3.png](img_3.png)
+![img_3.png](.github/assets/img_3.png)
 
 ## Notes
 
@@ -29,5 +29,5 @@
 ### -İsimlendirmelere dikkat edilsin ✔️
 
 ## -Gerekli validasyonlar yazılsın ✔️
-![img_4.png](img_4.png)
-![img_5.png](img_5.png)
+![img_4.png](.github/assets/img_4.png)
+![img_5.png](.github/assets/img_5.png)
